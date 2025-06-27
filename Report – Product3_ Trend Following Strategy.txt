@@ -1,0 +1,36 @@
+﻿Report – Product3: Trend Following Strategy
+1. Dataset Exploration
+Visual inspection of prices.csv for Product3 showed:
+* Trend Behavior: At times, prices either steadily rise or fall for short stretches.
+
+* Momentum Patterns: Sustained price movement in one direction often precedes further continuation.
+
+* Smoother Shifts: Less mean-reverting and more directional than Product2.
+
+2. Strategy Motivation
+A trend-following strategy suits this product because:
+   * Price changes are not immediately reversed.
+
+   * Capturing early momentum can lead to short-term profits.
+
+   * A classic moving average crossover can identify trend shifts.
+
+3. Core Logic
+      * Tracks mid-prices over time.
+
+      * Computes:
+
+         * Short-term average: last 5 prices.
+
+         * Long-term average: last 20 prices.
+
+            * If short > long → uptrend → buy
+
+            * If short < long → downtrend → sell
+
+4. Experiments & Insights
+               * Short window = 3 → reacted too quickly; too much noise.
+
+               * Long window > 30 → lagged too much and missed reversals.
+
+               * Final config: 5-short vs. 20-long, volume = 10, balances reactiveness and stability.

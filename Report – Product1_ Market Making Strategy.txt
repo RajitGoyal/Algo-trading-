@@ -1,0 +1,32 @@
+﻿Report – Product1: Market Making Strategy
+1. Dataset Exploration
+Using the provided prices.csv, I plotted bid and ask prices over time. Key findings:
+* Price Range: The product consistently trades within a tight range: around $9995 to $10005.
+
+* Mid Price Stability: The average mid-price hovers close to $10,000 with very small fluctuations.
+
+* Order Book Depth: At each timestamp, up to 3 bids and asks are available. This allows for constant spread-based opportunities.
+
+2. Strategy Motivation
+Given the stable price range and visible spread in the orderbook, a Market Making strategy is ideal.
+   * Market makers profit from placing simultaneous buy and sell orders on both sides of the spread.
+
+   * With prices bouncing within a narrow band, this lets us accumulate small profits repeatedly without directional bets.
+
+3. Core Logic
+      * Computed the mid-price using the best bid and best ask.
+
+      * Placed a buy order just below the mid-price (e.g., mid - 1).
+
+      * Placed a sell order just above the mid-price (e.g., mid + 1).
+
+      * Used modest order volume (10) to avoid breaching ±50 position limits.
+
+4. Experiments & Insights
+         * Using a larger volume increased profit but caused rejections due to position limits.
+
+         * Tighter spreads (mid ± 0) sometimes got filled faster but reduced profitability.
+
+         * Wider spreads (mid ± 2) reduced fill rate significantly.
+
+Optimal setup: mid ± 1 with quantity = 10.
